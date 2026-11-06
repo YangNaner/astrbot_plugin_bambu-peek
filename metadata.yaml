@@ -1,4 +1,4 @@
-name: astrbot_plugin_bambu_printer
+name: astrbot_plugin_bambu_peek
 display_name: 拓竹打印机
 desc: 通过局域网查看拓竹（Bambu Lab）打印机状态、拍摄摄像头照片，并可暂停/继续/取消打印。
 short_desc: 局域网查看拓竹打印机状态并拍照

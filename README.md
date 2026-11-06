@@ -1,4 +1,8 @@
-# 拓竹打印机插件（astrbot_plugin_bambu_printer）
+# 拓竹打印机插件（astrbot_plugin_bambu_peek）
+
+> 仓库地址：<https://github.com/YangNaner/astrbot_plugin_bambu-peek>
+> 插件包名（`metadata.yaml` 的 `name`、安装目录名）是 `astrbot_plugin_bambu_peek`，
+> 与仓库名仅差连字符 —— AstrBot 要求插件名是合法 Python 标识符，不能用 `-`。
 
 通过局域网直接访问家里的拓竹（Bambu Lab）打印机，让机器人能**查看打印状态**、**拍照发图**，
 以及**暂停 / 继续 / 取消打印**。全程走本地网络，不需要云端、不需要账号。
@@ -22,12 +26,12 @@
 ### 方式一：上传安装包（推荐）
 
 1. 在 AstrBot 管理面板 → **插件** → 右上角 **安装插件（+）** → **从文件安装**
-2. 上传 `astrbot_plugin_bambu_printer.zip`
+2. 上传 `astrbot_plugin_bambu_peek.zip`
 3. 安装完成后在「已安装」列表里确认插件已开启、无报错
 
 ### 方式二：手动放置
 
-把整个 `astrbot_plugin_bambu_printer` 文件夹复制到 AstrBot 的 `data/plugins/` 目录下，
+把整个 `astrbot_plugin_bambu_peek` 文件夹复制到 AstrBot 的 `data/plugins/` 目录下，
 然后在面板里点击 **重载插件**。
 
 ### 依赖
@@ -77,7 +81,7 @@ opencv-python-headless>=4.8.0
 ## 文件结构
 
 ```
-astrbot_plugin_bambu_printer/
+astrbot_plugin_bambu_peek/
 ├── main.py               # 插件入口与指令处理
 ├── metadata.yaml         # 插件元数据
 ├── _conf_schema.json     # 配置项定义
