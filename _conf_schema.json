@@ -1,0 +1,51 @@
+{
+  "ip": {
+    "description": "打印机 IP 地址",
+    "type": "string",
+    "default": "192.168.1.14",
+    "hint": "拓竹打印机在局域网中的 IP，需与运行 AstrBot 的机器同一网络"
+  },
+  "access_code": {
+    "description": "访问码 (Access Code)",
+    "type": "string",
+    "default": "",
+    "secret": true,
+    "hint": "打印机屏幕「设置 → 网络 → 接入局域网模式」中的访问码，用于 MQTT/FTP/RTSP 认证"
+  },
+  "serial": {
+    "description": "打印机序列号",
+    "type": "string",
+    "default": "",
+    "hint": "留空即可，插件会自动通过 MQTT 通配符订阅发现序列号"
+  },
+  "mqtt_port": {
+    "description": "MQTT 端口",
+    "type": "int",
+    "default": 8883
+  },
+  "camera_port": {
+    "description": "摄像头 RTSPS 端口",
+    "type": "int",
+    "default": 322
+  },
+  "timeout": {
+    "description": "获取状态的超时时间（秒）",
+    "type": "int",
+    "default": 20
+  },
+  "camera_timeout": {
+    "description": "摄像头取流超时时间（秒）",
+    "type": "int",
+    "default": 20
+  },
+  "camera_enabled": {
+    "description": "启用摄像头拍照功能",
+    "type": "bool",
+    "default": true
+  },
+  "photo_with_status": {
+    "description": "查看状态时同时附带一张照片",
+    "type": "bool",
+    "default": false
+  }
+}
