@@ -20,10 +20,13 @@ _PLUGIN_DIR = str(Path(__file__).resolve().parent)
 if _PLUGIN_DIR not in sys.path:
     sys.path.insert(0, _PLUGIN_DIR)
 
+# 插件名 = 安装目录名（AstrBot 安装时按 metadata.yaml 的 name 创建目录）
+PLUGIN_NAME = Path(__file__).resolve().parent.name
+
 import astrbot.api.message_components as Comp  # noqa: E402
 from astrbot.api import AstrBotConfig, logger  # noqa: E402
 from astrbot.api.event import AstrMessageEvent, filter  # noqa: E402
-from astrbot.api.star import Context, Star  # noqa: E402
+from astrbot.api.star import Context, Star, StarTools  # noqa: E402
 from bambu.camera import CameraError, capture_camera  # noqa: E402
 from bambu.core import BambuService, PrinterError  # noqa: E402
 from bambu.format import format_status  # noqa: E402
@@ -61,20 +64,23 @@ class BambuPrinterPlugin(Star):
         return value
 
     def _data_dir(self) -> Path:
-        """持久化目录放在 AstrBot 的 data 目录下，避免插件更新时被覆盖。
+        """返回插件持久化目录，遵循 AstrBot 标准路径 data/plugin_data/<插件名>。
 
-        标准安装结构为 <AstrBot>/data/plugins/<插件名>，因此向上找到名为
-        "data" 的祖先目录；若结构不同则退回当前工作目录下的 data/。
+        上架规范要求插件数据保存在 data/plugin_data/{plugin_name} 下
+        （见 StarTools.get_data_dir），这样备份、迁移和卸载清理时能被正确识别。
+        插件名取安装目录名，安装时 AstrBot 会用 metadata.yaml 的 name 命名目录。
         """
-        plugin_dir = Path(__file__).resolve().parent
-        data_root = None
-        for parent in plugin_dir.parents:
+        try:
+            return StarTools.get_data_dir(PLUGIN_NAME)
+        except Exception as e:
+            logger.warning(f"[bambu] StarTools 获取数据目录失败，改用兜底路径: {e}")
+
+        for parent in Path(__file__).resolve().parent.parents:
             if parent.name == "data":
-                data_root = parent
+                d = parent / "plugin_data" / PLUGIN_NAME
                 break
-        if data_root is None:
-            data_root = Path.cwd() / "data"
-        d = data_root / "bambu_printer"
+        else:
+            d = Path.cwd() / "data" / "plugin_data" / PLUGIN_NAME
         d.mkdir(parents=True, exist_ok=True)
         return d
 

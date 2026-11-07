@@ -97,5 +97,6 @@ astrbot_plugin_bambu_peek/
 
 - 「局域网直连打印」还需要把切片文件写进打印机存储，当前固件对该目录只读（`550`），
   所以插件提供的是**状态查看 + 拍照 + 打印控制**，不负责推送新的打印任务。
-- 照片保存在 AstrBot 的 `data/bambu_printer/` 目录。
+- 照片保存在 AstrBot 的标准插件数据目录 `data/plugin_data/astrbot_plugin_bambu_peek/`
+  （通过 `StarTools.get_data_dir()` 获取，符合插件市场上架规范）。
 - 插件在后台线程维持 MQTT 长连接，断线会自动重连；卸载插件时连接会被关闭。
